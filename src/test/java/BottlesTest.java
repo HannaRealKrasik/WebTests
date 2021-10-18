@@ -20,8 +20,8 @@ public class BottlesTest {
     }
     @AfterMethod
     public void after(){
-   // driver.close();
-  //  driver.quit();
+   driver.close();
+    driver.quit();
 
     }
 
