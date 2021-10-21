@@ -35,7 +35,7 @@ public class BottlesTest {
         Assert.assertEquals(actual,espected);
 
 
-        WebElement searchName = driver.findElement(By.xpath("//*[text()='Welcome to 99 Bottles of Beer']"));
+        WebElement searchName = driver.findElement(By.xpath("//h2[text()='Welcome to 99 Bottles of Beer']"));
         String extectedName = "Welcome to 99 Bottles of Beer";
         Assert.assertEquals(searchName.getText(), extectedName );
 
