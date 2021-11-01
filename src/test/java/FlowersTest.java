@@ -24,7 +24,7 @@ public class FlowersTest {
     }
     @AfterMethod
      public void after(){
-        //driver.quit();
+        driver.quit();
     }
 
     @Test
