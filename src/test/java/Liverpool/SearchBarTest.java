@@ -2,6 +2,7 @@ package Liverpool;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -21,19 +22,30 @@ public class SearchBarTest {
     public void before() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
+
     }
     @AfterMethod
     public void after(){
-      //  driver.quit();
+        driver.quit();
     }
+
+   public void waiter(By element){
+       WebDriverWait wait = new WebDriverWait(driver,5);
+       wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+   }
 
     public void searchBarInput(String key, By element){
         driver.get("https://www.liverpool.com.mx/tienda/home");
         driver.findElement(By.id("mainSearchbar")).sendKeys(key);
         driver.findElement(By.xpath("//button[@class='input-group-text']/i")).click();
-        WebDriverWait wait = new WebDriverWait(driver,3);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+        waiter(element);
 
+    }
+
+    public  void scrollClick(WebDriver driver, WebElement element) {
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].scrollIntoView();", element);
+        element.click();
     }
 
     @Test
@@ -59,15 +71,23 @@ public class SearchBarTest {
     }
 
     @Test
-    public void testBrendInput(){
-        final String TEXT = "armani";
-        searchBarInput("Armani",By.xpath("//a[@class='a-breadcrumb__label 6']"));
+    public void testBrandInput() {
+        final String TEXT = "gucci";
+        searchBarInput("GUCCI",By.xpath("//a[@class='a-breadcrumb__label 6']"));
 
-        Assert.assertEquals(driver.findElement(By.xpath("//a[@class='a-breadcrumb__label 6']")).getText(),"Armani");
-        List<WebElement> item = driver.findElements(By.xpath("//h5[@class='card-title a-card-description']"));
-        for (int i = 0; i < item.size(); i++){
-            Assert.assertTrue(item.get(i).getText().toLowerCase().contains(TEXT));
+        Assert.assertEquals(driver.findElement(By.xpath("//a[@class='a-breadcrumb__label 6']")).getText(), "GUCCI");
+
+            for (int a = 2; a <= 4; a++) {
+                waiter(By.xpath("//h5[@class='card-title a-card-description']"));
+                List<WebElement> brandTitles = driver.findElements(By.xpath("//h5[@class='card-title a-card-description']"));
+                for (int i = 0; i < brandTitles.size(); i++){
+                    Assert.assertTrue(brandTitles.get(i).getText().toLowerCase().contains(TEXT));}
+                scrollClick(driver, driver.findElement(By.xpath("//li/a[@class='page-link'][contains(text(),'" + a + "')]")));
+            }
         }
-
-    }
 }
+
+
+
+
+
