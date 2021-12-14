@@ -43,7 +43,6 @@ public class BuySmartTV extends Main {
         for (int i = 0; i < price.size(); i++) {
             String a = price.get(i).getText().replace(",", "").replace("$", "").replace("75",".75");
             float priceOfEach = Float.parseFloat(a);
-            System.out.println(priceOfEach);
             Assert.assertTrue(priceOfEach > min && priceOfEach < max);
         }
     }
