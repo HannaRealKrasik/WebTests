@@ -22,7 +22,7 @@ public class FindElement {
         driver.findElement(By.linkText("Example 1: Menu Element")).click();
         List<WebElement> numbel = driver.findElements(By.tagName("li"));
         System.out.println(numbel.size());
-
+        driver.quit();
 
     }
 }
