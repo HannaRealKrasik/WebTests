@@ -15,6 +15,7 @@ public class XpathTest {
 
         @Test
         public void testXpath() {
+            System.setProperty("webdriver.http.factory", "jdk-http-client");
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
 

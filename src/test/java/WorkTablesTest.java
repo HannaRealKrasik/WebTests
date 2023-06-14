@@ -16,6 +16,7 @@ public class WorkTablesTest {
 
     @BeforeMethod
     public void Before(){
+        System.setProperty("webdriver.http.factory", "jdk-http-client");
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
     }

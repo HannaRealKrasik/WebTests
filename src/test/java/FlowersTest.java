@@ -19,6 +19,7 @@ public class FlowersTest {
 
     @BeforeMethod
     public void before() {
+        System.setProperty("webdriver.http.factory", "jdk-http-client");
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
     }

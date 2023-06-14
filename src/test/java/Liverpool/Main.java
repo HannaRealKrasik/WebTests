@@ -9,11 +9,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import java.time.Duration;
+
 public class Main {
     public static WebDriver driver;
 
     @BeforeMethod
     public void before() {
+        System.setProperty("webdriver.http.factory", "jdk-http-client");
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
 
@@ -24,7 +27,7 @@ public class Main {
     }
 
     public void waiter(By element){
-        WebDriverWait wait = new WebDriverWait(driver,5);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(element));
     }
 }
